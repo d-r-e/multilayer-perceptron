@@ -10,5 +10,5 @@ test:
 
 push:
 	git add $(SRC) $(DOCS) $(DATA) makefile
-	git commit -m "upload from 42 Madrid"
+	git commit -m "added cross entropy function to math"
 	git push
