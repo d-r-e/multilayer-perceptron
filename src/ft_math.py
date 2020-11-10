@@ -18,7 +18,10 @@ def sigmoid(X):
 
 
 def relu(X):
-    return np.max(X, 0)
+    if (isinstance(X, np.ndarray)):
+        return np.array([max(n, 0) for n in X])
+    else:
+        return max(X,0)
 
 
 def cross_entropy(y, p):
@@ -37,3 +40,5 @@ if __name__ == '__main__':
 
     print()
     print(cross_entropy(y, ypred))
+    x2 = np.array([-1,-2.8,-0,1.4,1])
+    print(relu(x2))
