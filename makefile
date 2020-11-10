@@ -10,5 +10,5 @@ test:
 
 push:
 	git add $(SRC) $(DOCS) $(DATA) makefile
-	git commit -m "pycodestyling"
+	git commit -m "d-r-e"
 	git push
