@@ -10,5 +10,5 @@ test:
 
 push:
 	git add $(SRC) $(DOCS) $(DATA) makefile
-	git commit -m "d-r-e"
+	git commit -m "perceptron as in TowardsDataScience"
 	git push
