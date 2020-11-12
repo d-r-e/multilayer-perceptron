@@ -50,7 +50,8 @@ class Relu(Layer):
         pass
 
     def forward(self, input):
-        return relu(input)
+        relu_forward = np.maximum(0,input)
+        return relu_forward
 
     def backward(self, input, grad_output):
         relu_grad = input > 0
