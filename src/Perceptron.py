@@ -1,5 +1,5 @@
-from ft_math import sigmoid, relu, softmax
-from ft_math import cross_entropy as cost
+from src.ft_math import sigmoid, relu, softmax
+from src.ft_math import cross_entropy as cost
 import numpy as np
 import sklearn.preprocessing
 
@@ -98,9 +98,28 @@ class Dense(Layer):
         return grad_input
 
 
+def softmax_crossentropy_with_logits(logits, reference_answers):
+    logits_for_answers = logits[np.arange(len(logits)), reference_answers]
+    xentropy = - logits_for_answers + np.log(np.sum(np.exp(logits), axis=-1))
+    return xentropy
+
+
+def grad_softmax_crossentropy_with_logits(logits, reference_answers):
+    ones_for_answers = np.zeros_like(logits)
+    ones_for_answers[np.arange(len(logits)), reference_answers] = 1
+
+    softmax = np.exp(logits) / np.exp(logits).sum(axis=-1, keepdims=True)
+
+    return ( -ones_for_answers + softmax) / logits.shape[0]
+
+
 if __name__ == "__main__":
-    n = 8
+    """ n = 8
     l0 = Dense(n, 2)
     X = np.eye(n)
     print(l0.forward(X))
     print(l0.backward(X, l0.forward(X)))
+    print() """
+    x2 = np.array([1, 1, 1, 1, 1, 1])
+    x3 = x2
+    print(scross(x2, x3))
