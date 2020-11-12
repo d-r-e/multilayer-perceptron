@@ -1,5 +1,3 @@
-from src.ft_math import sigmoid, relu, softmax
-from src.ft_math import cross_entropy as cost
 import numpy as np
 import sklearn.preprocessing
 
