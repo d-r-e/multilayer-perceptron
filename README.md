@@ -6,7 +6,9 @@
 ```
 ```
 _Summary: This project is an introduction to artificial neural networks, with the
-implementation of a multilayer perceptron_
+implementation of a multilayer perceptron. Using a database with medical values from
+a tumour imaging system, the perceptron is able to learn and predict the result of
+future cancer diagnosis based on previous results with an accouracy higher than 90%._
 
 ![](https://dzone.com/storage/temp/3627042-mlp-network.png)
 
