@@ -58,7 +58,7 @@ class Relu(Layer):
 
 class Dense(Layer):
 
-    def __init__(self, input_units, output_units, learning_rate=0.1):
+    def __init__(self, input_units, output_units, learning_rate=0.001):
         """ A dense layer performs a learned affine transformation:
             f(x) = <W*x> + b """
         self.learning_rate = learning_rate
