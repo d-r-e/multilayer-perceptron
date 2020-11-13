@@ -122,4 +122,3 @@ if __name__ == "__main__":
     print() """
     x2 = np.array([1, 1, 1, 1, 1, 1])
     x3 = x2
-    print(scross(x2, x3))
