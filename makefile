@@ -10,5 +10,5 @@ test:
 
 push:
 	git add $(SRC) $(DOCS) $(DATA) makefile
-	git commit -m "perceptron as in TowardsDataScience"
+	git commit -m "multilayer perceptron 42 madrid"
 	git push
