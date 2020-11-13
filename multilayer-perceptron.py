@@ -14,11 +14,9 @@ if __name__ == "__main__":
     y_test = y_train[split+1:]
 
     network = []
-    network.append(Dense(X_train.shape[1], 50))
+    network.append(Dense(X_train.shape[1], 30))
     network.append(Relu())
-    network.append(Dense(50, 50))
-    network.append(Relu())
-    network.append(Dense(50, 10))
+    network.append(Dense(30, 10))
     network.append(Relu())
     network.append(Dense(10, 2))
 
