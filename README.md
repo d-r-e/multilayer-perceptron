@@ -1,4 +1,5 @@
 # Machine Learning project
+![](https://miro.medium.com/max/764/0*CKHFRJNnk547glVm.png)
 
 ## Multilayer Perceptron
 
