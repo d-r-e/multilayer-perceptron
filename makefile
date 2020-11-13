@@ -1,6 +1,6 @@
 NAME= multilayer-perceptron
 
-SRC = src/*.py multilayer-perceptron.ipynb
+SRC = src/*.py
 
 DOCS = docs/*.pdf
 
