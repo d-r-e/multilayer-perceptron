@@ -1,5 +1,5 @@
 import numpy as np
-
+from math import log2
 
 def mean(X):
     """ Average value of a series of data """
@@ -8,9 +8,13 @@ def mean(X):
 
 
 def softmax(X):
-    """ Exponential normalized function """
-    return (np.exp(X) / np.sum(np.exp(X)))
+    exps = np.exp(X - np.max(X))
+    return exps / np.sum(exps)
 
+def softmax_grad(softmax):
+    # Reshape the 1-d softmax to 2-d so that np.dot will do the matrix multiplication
+    s = softmax.reshape(-1,1)
+    return np.diagflat(s) - np.dot(s, s.T)
 
 def stablesoftmax(x):
     """Compute the softmax of vector x in a numerically stable way."""
@@ -18,6 +22,11 @@ def stablesoftmax(x):
     exps = np.exp(shiftx)
     return exps / np.sum(exps)
 
+def cross_entropy(y_hat, y):
+    eps = 1e-15
+    y = np.squeeze(y)
+    c = sum((y * np.log(y_hat + eps)) + ((1 - y) * np.log(1 - y_hat + eps))) / -len(y)
+    return c
 
 def sigmoid(X):
     """ Sigmoid Function """
@@ -31,15 +40,22 @@ def relu(X):
         return max(X, 0)
 
 
-def cross_entropy(y, p):
-    eps = 1e-15
-    c = -sum((y * np.log(p + eps)) + ((1 - y) * np.log(1 - p + eps))) / len(y)
-    return c
-
+def delta_cross_entropy(X,y):
+    """
+    X is the output from fully connected layer (num_examples x num_classes)
+    y is labels (num_examples x 1)
+    	Note that y is not one-hot encoded vector. 
+    	It can be computed as y.argmax(axis=1) from one-hot encoded vectors of labels if required.
+    """
+    m = y.shape[0]
+    grad = softmax(X)
+    grad[range(m),y] -= 1
+    grad = grad/m
+    return grad
 
 def softmax_crossentropy_with_logits(logits, reference_answers):
     logits_for_answers = logits[np.arange(len(logits)), reference_answers]
-    xentropy = - logits_for_answers + np.log(np.sum(np.exp(logits), axis=-1))
+    xentropy = - logits_for_answers + np.log(np.sum(np.exp(logits) + 1e-14, axis=-1))
     return xentropy
 
 

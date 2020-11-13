@@ -62,11 +62,9 @@ class Dense(Layer):
         """ A dense layer performs a learned affine transformation:
             f(x) = <W*x> + b """
         self.learning_rate = learning_rate
-        self.weights = np.random.normal(
-            loc=0.0,
-            scale=np.sqrt(2/(input_units + output_units)),
-            size=(input_units, output_units)
-            )
+        self.weights = np.random.normal(loc=0.0, 
+                                        scale = np.sqrt(2/(input_units+output_units)), 
+                                        size = (input_units,output_units))
         self.biases = np.zeros(output_units)
 
     def forward(self, input):
@@ -97,19 +95,22 @@ class Dense(Layer):
         return grad_input
 
 
-def softmax_crossentropy_with_logits(logits, reference_answers):
-    logits_for_answers = logits[np.arange(len(logits)), reference_answers]
-    xentropy = - logits_for_answers + np.log(np.sum(np.exp(logits), axis=-1))
+def softmax_crossentropy_with_logits(logits,reference_answers):
+    # Compute crossentropy from logits[batch,n_classes] and ids of correct answers
+    logits_for_answers = logits[np.arange(len(logits)),reference_answers]
+    
+    xentropy = - logits_for_answers + np.log(np.sum(np.exp(logits),axis=-1))
+    
     return xentropy
 
-
-def grad_softmax_crossentropy_with_logits(logits, reference_answers):
+def grad_softmax_crossentropy_with_logits(logits,reference_answers):
+    # Compute crossentropy gradient from logits[batch,n_classes] and ids of correct answers
     ones_for_answers = np.zeros_like(logits)
-    ones_for_answers[np.arange(len(logits)), reference_answers] = 1
-
-    softmax = np.exp(logits) / np.exp(logits).sum(axis=-1, keepdims=True)
-
-    return ( -ones_for_answers + softmax) / logits.shape[0]
+    ones_for_answers[np.arange(len(logits)),reference_answers] = 1
+    
+    softmax = np.exp(logits) / np.exp(logits).sum(axis=-1,keepdims=True)
+    
+    return (- ones_for_answers + softmax) / logits.shape[0]
 
 
 if __name__ == "__main__":
