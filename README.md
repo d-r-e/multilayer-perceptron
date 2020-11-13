@@ -8,6 +8,7 @@
 _Summary: This project is an introduction to artificial neural networks, with the
 implementation of a multilayer perceptron_
 
+![](https://dzone.com/storage/temp/3627042-mlp-network.png)
 
 ## Contents
 
