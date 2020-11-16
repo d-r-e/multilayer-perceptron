@@ -9,9 +9,9 @@ if __name__ == "__main__":
     df = pd.read_csv('./data/data.csv')
     split= 300
     X_train = normalize(np.array(df.iloc[:,2:]))
-    X_test = X_train[split + 1:,:]
+    X_test = X_train[split:,:]
     y_train = np.squeeze(np.array(df['diagnosis'].map({'M':1,'B':0})))
-    y_test = y_train[split+1:]
+    y_test = y_train[split:]
 
     network = []
     network.append(Dense(X_train.shape[1], 30))
@@ -80,8 +80,9 @@ if __name__ == "__main__":
     from IPython.display import clear_output
     train_log = []
     val_log = []
+    np.random.seed(42)
     for epoch in range(1000):
-        for x_batch,y_batch in iterate_minibatches(X_train,y_train,batchsize=10,shuffle=True):
+        for x_batch,y_batch in iterate_minibatches(X_train,y_train,batchsize=1,shuffle=False):
             train(network,x_batch,y_batch)
         
         train_log.append(np.mean(predict(network,X_train)==y_train))
