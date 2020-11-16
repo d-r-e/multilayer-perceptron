@@ -82,7 +82,7 @@ if __name__ == "__main__":
     val_log = []
     np.random.seed(42)
     for epoch in range(1000):
-        for x_batch,y_batch in iterate_minibatches(X_train,y_train,batchsize=1,shuffle=False):
+        for x_batch,y_batch in iterate_minibatches(X_train,y_train,batchsize=2,shuffle=True):
             train(network,x_batch,y_batch)
         
         train_log.append(np.mean(predict(network,X_train)==y_train))
